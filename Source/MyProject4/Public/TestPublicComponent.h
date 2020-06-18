@@ -22,6 +22,7 @@ public:
 	//Character's Health
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Character)
 		float bootyShaky;
+
 		
 
 protected:
