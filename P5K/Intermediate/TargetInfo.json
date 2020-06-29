@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "P5K",
+			"Path": "E:\\Project5000\\P5K\\Source\\P5K.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "P5KEditor",
+			"Path": "E:\\Project5000\\P5K\\Source\\P5KEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}

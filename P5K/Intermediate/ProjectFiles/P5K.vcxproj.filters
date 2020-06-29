@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\P5K.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{43235347-1FA2-42FA-A7DA-401DAE8881C5}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\P5K.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\P5KEditor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <Filter Include="Config">
+      <UniqueIdentifier>{F1392703-A4D7-491F-8C6F-9E026374A778}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEditorPerProjectUserSettings.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Source\P5K">
+      <UniqueIdentifier>{16C9D06C-ACF4-4194-BBB7-A7BFDEE3F0F4}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\P5K\P5K.Build.cs">
+      <Filter>Source\P5K</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\P5K\P5K.cpp">
+      <Filter>Source\P5K</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\P5K\P5K.h">
+      <Filter>Source\P5K</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\P5K\P5KCharacter.cpp">
+      <Filter>Source\P5K</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\P5K\P5KCharacter.h">
+      <Filter>Source\P5K</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\P5K\P5KGameMode.cpp">
+      <Filter>Source\P5K</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\P5K\P5KGameMode.h">
+      <Filter>Source\P5K</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\P5K\P5KHUD.cpp">
+      <Filter>Source\P5K</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\P5K\P5KHUD.h">
+      <Filter>Source\P5K</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\P5K\P5KProjectile.cpp">
+      <Filter>Source\P5K</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\P5K\P5KProjectile.h">
+      <Filter>Source\P5K</Filter>
+    </ClInclude>
+    <None Include="cpp.hint" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source\P5K\Public">
+      <UniqueIdentifier>{600abdc3-30b8-4e4d-9598-ce407369a611}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\P5K\Private">
+      <UniqueIdentifier>{88a05f56-0b8c-4069-bb94-89ef932b4604}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\P5K\Public\EnemyTest.h">
+      <Filter>Source\P5K\Public</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\P5K\Private\EnemyTest.cpp">
+      <Filter>Source\P5K\Private</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
