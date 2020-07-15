@@ -40,19 +40,28 @@ public class inventory {//TO DO text parser for loading at the game start //TO D
 		if (!(input->stackable)) {
 			//TODO check all slots until one completely free
 			space_available -= (input->space_used);
-			space_used -= (input->space_used);
+			space_used += (input->space_used);
 			slotInventory* chosen_slot = input;
 			return true;
 		}
 		else {
 			//TODO check all slots until one with the same item and enught space
 			space_available -= (input->space_used);
-			space_used -= (input->space_used);
+			space_used += (input->space_used);
 			slotInventory* chosen_slot = 0;
 			chosen_slot->quantity += input->quantity;
 			chosen_slot->space_used += input->space_used;
 			return true;
 		}
+	}
+	void remove(slotInventory* slot) {
+		space_available += (slot->space_used);
+		space_used -= (slot->space_used);
+		slot->itme = null;
+		slot->quantity = 0;
+		slot->space_used = 0;
+		slot->stackable = true;
+		slot->data = null;
 	}
 	string serialize() {
 		string file = space_used + ";" + max_space_available + ";\r\n";
