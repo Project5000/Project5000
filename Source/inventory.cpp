@@ -19,7 +19,7 @@ public struct item{
 item[] itemlist;//contains the list of all items programmed in the game and that the player can obtain
 item[] moddeditems//for eventual future support of mods
 /// <summary>
-/// 
+/// manages a single slot of the inventory
 /// </summary>
 public class slotInventory {
 	public item* item;//stores the the item contined the value 0 rapresent a free slot .take it from the items list DO NOT GENERATE A NEW ISTANCE
@@ -31,7 +31,7 @@ public class slotInventory {
 
 };
 /// <summary>
-/// 
+/// manages the entirety of the inventory
 /// </summary>
 public class inventory {//TO DO text parser for loading at the game start //TO DO complete functions //TODO add clone function for lastinventory
 
@@ -95,9 +95,9 @@ public class inventory {//TO DO text parser for loading at the game start //TO D
 		}
 		slotInventory* result = new slotInventory();
 		result->item = slot->item;
-		result->space_used = (slot->space_used/slot->quantity)*quantity;//TO DO define the way used space is computed
+		result->space_used = (slot->space_used / slot->quantity) * quantity;//TO DO define the way used space is computed
 		result->quantity = quantity;
-		slot->quantity -= quantity;		
+		slot->quantity -= quantity;
 		slot->space_used += result->space_used;
 		result->stackable = true;
 		result->data = slot->data;
@@ -119,10 +119,60 @@ public class inventory {//TO DO text parser for loading at the game start //TO D
 			result += currentstr;
 		}
 	}
+	/// <summary>
+	/// initializes the inventory to be called on savefile load
+	/// </summary>
+	/// <param name="savefile">savefile from wich to pick the inventory</param>
+	/// <returns>eventual errors</returns>
+	public string initialize(string savefile) {
+		//TODO load inventory
+	}
+	/// <summary>
+	/// colones the inventory
+	/// </summary>
+	/// <returns>copy of the original</returns>
+	public inventory clone() {
+
+	}
 };
-inventory* current_inventory;// inventory on wich the game operates
-inventory* last_inventory;//used for faster reload of the last save
 const string itemsurce//contains the location of the file containing the list of itmes
+inventory* last_inventory;//used for faster reload of the last save
+inventory* current_inventory;// inventory on wich the game operates
+
+/// <summary>
+/// used to load a save
+/// </summary>
+/// <param name="surce"></param>
+/// <returns></returns>
+public string load_save(string surce) {
+	last_inventory = new inventory();
+	string msg = last_inventory.initialize(surce);
+	if ( msg!= null) {
+		return msg;
+	}
+	current_inventory = last_inventory.clone();
+}
+/// <summary>
+/// used to quickly load the last save ex player just died
+/// </summary>
+/// <returns></returns>
+public string quick_load_save() {//TO DO deallocate current_inventory before replacing it
+	if (!last_inventory) {
+		return "unable to load no previus save loaded";
+	}
+	current_inventory = last_inventory.clone();
+}
+/// <summary>
+/// saves the current proggress
+/// </summary>
+/// <returns></returns>
+public string save() {//TO DO deallocate last_inventory before replacing it
+	if (!current_inventory) {
+		return "unable to save inventory missing";
+	}
+	last_inventory = current_inventory.clone();
+	//TODO write to file;
+}
 
 /// <summary>
 /// loads all items it must be calles on the game start
@@ -131,12 +181,5 @@ const string itemsurce//contains the location of the file containing the list of
 public string initialize() {
 	//TODO loat items
 }
-/// <summary>
-/// initializes the inventory to be called on savefile load
-/// </summary>
-/// <param name="savefile">savefile from wich to pick the inventory</param>
-/// <returns>eventual errors</returns>
-public string initialize(string savefile) {
-	//TODO load inventory
-}
+
 
