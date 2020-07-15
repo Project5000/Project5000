@@ -9,6 +9,7 @@ public struct item{
 	string name;
 	string desciption;//a short description of the item
 	string defaultData;//stores the base data for every time this item is generated DO NOT READ WHEN CHEKING INVENTORY
+	string tags;//contains a list of varius tag associated with an item ex is_weapon or is_food
 };
 
 
@@ -54,7 +55,7 @@ public class inventory {//TO DO text parser for loading at the game start //TO D
 			return true;
 		}
 	}
-	void remove(slotInventory* slot) {
+	void remove(slotInventory* slot) {//used for complete removal of an item for partial removal use removeamount
 		space_available += (slot->space_used);
 		space_used -= (slot->space_used);
 		slot->itme = null;
@@ -62,6 +63,25 @@ public class inventory {//TO DO text parser for loading at the game start //TO D
 		slot->space_used = 0;
 		slot->stackable = true;
 		slot->data = null;
+	}
+	slotInventory* remove_amount(slotInventory* slot, int quantity) {//returns null for invalid operation
+		if (!slot->stackable || quantity == slot->quantity) {
+			//TO DO clone slot applly remove to the original and return the copy
+		}
+		if (slot->quantity < quantity)
+		{
+			return null;
+		}
+		slotInventory* result = new slotInventory();
+		result->item = slot->item;
+		result->space_used = (slot->space_used/slot->quantity)*quantity;//TO DO define the way used space is computed
+		result->quantity = quantity;
+		slot->quantity -= quantity;		
+		slot->space_used += result->space_used;
+		result->stackable = true;
+		result->data = slot->data;
+		space_available += (result->space_used);
+		space_used -= (result->space_used);
 	}
 	string serialize() {
 		string file = space_used + ";" + max_space_available + ";\r\n";
