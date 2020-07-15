@@ -3,7 +3,9 @@
 //TO DO rework protection of the members of this file
 using std;
 
-
+/// <summary>
+/// 
+/// </summary>
 public struct item{
 	int id;	
 	string name;
@@ -16,7 +18,9 @@ public struct item{
 //TO DO text parser for loading at the game start
 item[] itemlist;//contains the list of all items programmed in the game and that the player can obtain
 item[] moddeditems//for eventual future support of mods
-
+/// <summary>
+/// 
+/// </summary>
 public class slotInventory {
 	public item* item;//stores the the item contined the value 0 rapresent a free slot .take it from the items list DO NOT GENERATE A NEW ISTANCE
 	public int quantity;
@@ -26,14 +30,21 @@ public class slotInventory {
 	public string data;// used for additional informations about the item ex durabiity or ammunitions 
 
 };
-
-public class inventory {//TO DO text parser for loading at the game start //TO DO complete functions
+/// <summary>
+/// 
+/// </summary>
+public class inventory {//TO DO text parser for loading at the game start //TO DO complete functions //TODO add clone function for lastinventory
 
 	int space_used;//for the possibility of taking in consideration the size of objects 
 	int space_available;//for the possibility of taking in consideration the size of objects
 	int max_space_available;
 	slotInventory* slots;// this points to either an array or a linked list depending if we opt to a fix or variable number of slots in the inventory
 	slotInventory* equipped;//pointer to the object currently equipped
+	/// <summary>
+	/// allows to insert one or more objects into the inventory
+	/// </summary>
+	/// <param name="input">itmens to add</param>
+	/// <returns>true for succsesfull operation</returns>
 	bool insert(slotInventory* input) {
 		if (space_available < (input->space_used)) {
 			return false;
@@ -55,7 +66,11 @@ public class inventory {//TO DO text parser for loading at the game start //TO D
 			return true;
 		}
 	}
-	void remove(slotInventory* slot) {//used for complete removal of an item for partial removal use removeamount
+	/// <summary>
+	/// used for deletion of an item for partial removal use removeamount
+	/// </summary>
+	/// <param name="slot">slot on wich do operate</param>
+	void remove(slotInventory* slot) {
 		space_available += (slot->space_used);
 		space_used -= (slot->space_used);
 		slot->itme = null;
@@ -64,7 +79,13 @@ public class inventory {//TO DO text parser for loading at the game start //TO D
 		slot->stackable = true;
 		slot->data = null;
 	}
-	slotInventory* remove_amount(slotInventory* slot, int quantity) {//returns null for invalid operation
+	/// <summary>
+	/// used to extract a certain quantiy from a slot
+	/// </summary>
+	/// <param name="slot">slot on wich do operate</param>
+	/// <param name="quantity">quantity to extract</param>
+	/// <returns>returns null for invalid operation otherwise a slot containing the item and it's info</returns>
+	slotInventory* remove_amount(slotInventory* slot, int quantity) {
 		if (!slot->stackable || quantity == slot->quantity) {
 			//TO DO clone slot applly remove to the original and return the copy
 		}
@@ -83,16 +104,39 @@ public class inventory {//TO DO text parser for loading at the game start //TO D
 		space_available += (result->space_used);
 		space_used -= (result->space_used);
 	}
+	/// <summary>
+	/// serializes the entire inventory into a string used for savefile or to be sent over network
+	/// </summary>
+	/// <returns>rappresentation of the inventory in a serialized string form</returns>
 	string serialize() {
-		string file = space_used + ";" + max_space_available + ";\r\n";
+		string result = space_used + ";" + max_space_available + ";\r\n";
 		while (true)//TO DO Scan the inventory set "current" to the current slot to serialize
 		{
 			//TO DO mark or skip empty slots
 			//TO DO use more efficient string builder
 			slotInventory* current = 0;
 			string currentstr = current->item->id + ";" + current->quantity + ";" + current->space_used + ";" + current->stackable + ";" + current->data + "\r\n";
-			file += currentstr;
+			result += currentstr;
 		}
 	}
 };
+inventory* current_inventory;// inventory on wich the game operates
+inventory* last_inventory;//used for faster reload of the last save
+const string itemsurce//contains the location of the file containing the list of itmes
+
+/// <summary>
+/// loads all items it must be calles on the game start
+/// </summary>
+/// <returns>eventual errors</returns>
+public string initialize() {
+	//TODO loat items
+}
+/// <summary>
+/// initializes the inventory to be called on savefile load
+/// </summary>
+/// <param name="savefile">savefile from wich to pick the inventory</param>
+/// <returns>eventual errors</returns>
+public string initialize(string savefile) {
+	//TODO load inventory
+}
 
